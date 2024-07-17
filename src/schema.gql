@@ -1,0 +1,143 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  rentRecords: [RentRecord!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserSearchResult {
+  rows: [User!]!
+  count: Int!
+  pageInfo: PageInfo!
+}
+
+type RentRecord {
+  id: ID!
+  userId: ID!
+  scooterId: ID!
+  startTime: DateTime!
+  endTime: DateTime
+  startLatitude: Float
+  startLongitude: Float
+  endLatitude: Float
+  endLongitude: Float
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User
+  scooter: Scooter
+}
+
+type RentRecordSearchResult {
+  rows: [RentRecord!]!
+  count: Int!
+  pageInfo: PageInfo!
+}
+
+type Scooter {
+  id: ID!
+  model: String!
+  status: ScooterStatus!
+  latitude: Float!
+  longitude: Float!
+  batteryLevel: Float!
+  serialNumber: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  rentRecords: [RentRecord!]!
+}
+
+"""The available statuses for a scooter"""
+enum ScooterStatus {
+  AVAILABLE
+  IN_USE
+  MAINTENANCE
+}
+
+type ScooterSearchResult {
+  rows: [Scooter!]!
+  count: Int!
+  pageInfo: PageInfo!
+}
+
+type Query {
+  users(filters: UserSearchInput!, offset: Int = 0, limit: Int = 50): UserSearchResult!
+  rentRecords(filters: RentRecordSearchInput!, offset: Int = 0, limit: Int = 50): RentRecordSearchResult!
+  scooters(filters: ScooterSearchInput!, offset: Int = 0, limit: Int = 50): ScooterSearchResult!
+}
+
+input UserSearchInput {
+  id: ID
+  email: String
+}
+
+input RentRecordSearchInput {
+  id: ID
+  userId: ID
+  scooterId: ID
+}
+
+input ScooterSearchInput {
+  id: ID
+  serialNumber: String
+  statuses: [ScooterStatus!]
+}
+
+type Mutation {
+  createUser(input: UserCreateInput!): User!
+  createRentRecord(input: RentRecordCreateInput!): RentRecord!
+  updateRentRecord(input: RentRecordUpdateInput!): RentRecord!
+  createScooter(input: ScooterCreateInput!): Scooter!
+  updateScooter(input: ScooterUpdateInput!): Scooter!
+}
+
+input UserCreateInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input RentRecordCreateInput {
+  userId: ID!
+  scooterId: ID!
+  startLatitude: Float!
+  startLongitude: Float!
+}
+
+input RentRecordUpdateInput {
+  id: ID!
+  endLatitude: Float!
+  endLongitude: Float!
+}
+
+input ScooterCreateInput {
+  model: String!
+  status: ScooterStatus! = AVAILABLE
+  latitude: Float!
+  longitude: Float!
+  batteryLevel: Float!
+  serialNumber: String!
+}
+
+input ScooterUpdateInput {
+  id: ID!
+  status: ScooterStatus
+  latitude: Float
+  longitude: Float
+  batteryLevel: Float
+}
