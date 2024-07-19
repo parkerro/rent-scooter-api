@@ -3,16 +3,20 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserService } from '@modules/users/providers/user.service';
 import { UserResolver } from '@modules/users/providers/user.resolver';
 import { User } from '@modules/users/entities/user.entity';
+import { RentRecordService } from '@modules/rentRecords/providers/rentRecord.service';
 
 describe('UserResolver', () => {
     let userResolver: UserResolver;
     let userService: UserService;
 
     const mockUserRepository = {
-        find: jest.fn(),
+        search: jest.fn(),
         findOne: jest.fn(),
+        findOneOrError: jest.fn(),
+        findByIds: jest.fn(),
+        findAll: jest.fn(),
         create: jest.fn(),
-        save: jest.fn(),
+        update: jest.fn(),
     };
 
     beforeEach(async () => {
@@ -23,6 +27,10 @@ describe('UserResolver', () => {
                 {
                     provide: getRepositoryToken(User),
                     useValue: mockUserRepository,
+                },
+                {
+                    provide: RentRecordService,
+                    useValue: {},
                 },
             ],
         }).compile();
