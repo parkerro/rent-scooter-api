@@ -1,4 +1,4 @@
-import { CommonPageInfo, CommonSearchParams } from "src/common/types/common.type";
+import { CommonPageInfo, CommonSearchParams } from "@common/types/common.type";
 
 export namespace PageInfoHelper {
     export const generate = (params: {

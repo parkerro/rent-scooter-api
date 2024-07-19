@@ -1,4 +1,4 @@
-import { CommonSearchParams } from "src/common/types/common.type";
+import { CommonSearchParams } from "@common/types/common.type";
 
 export type User = {
     id: number;

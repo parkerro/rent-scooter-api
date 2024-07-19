@@ -1,6 +1,6 @@
 import { ArgsType, Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { IsEmail, IsString, MinLength } from 'class-validator';
-import { CommonSearchArgs, PaginatedSearchResult } from 'src/common/types/common.gql.type';
+import { CommonSearchArgs, PaginatedSearchResult } from '@common/types/common.gql.type';
 
 @ObjectType()
 export class User {

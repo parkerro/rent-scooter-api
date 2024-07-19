@@ -1,6 +1,6 @@
 import { ArgsType, Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { IsDate, IsLatitude, IsLongitude, IsNotEmpty } from 'class-validator';
-import { CommonSearchArgs, PaginatedSearchResult } from 'src/common/types/common.gql.type';
+import { CommonSearchArgs, PaginatedSearchResult } from '@common/types/common.gql.type';
 
 @ObjectType()
 export class RentRecord {

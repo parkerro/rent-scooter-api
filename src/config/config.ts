@@ -1,5 +1,5 @@
 import { registerAs } from '@nestjs/config';
-import { BooleanHelper } from 'src/common/helpers/boolean.helper';
+import { BooleanHelper } from '@common/helpers/boolean.helper';
 
 export default registerAs('config', () => ({
     app: {

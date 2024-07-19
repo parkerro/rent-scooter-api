@@ -1,6 +1,6 @@
 import { ArgsType, Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { IsEnum, IsLatitude, IsLongitude, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validator';
-import { CommonSearchArgs, PaginatedSearchResult } from 'src/common/types/common.gql.type';
+import { CommonSearchArgs, PaginatedSearchResult } from '@common/types/common.gql.type';
 import { ScooterStatus } from './scooter.gql.enum';
 
 @ObjectType()

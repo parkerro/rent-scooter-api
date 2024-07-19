@@ -5,13 +5,13 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, FindOptionsWhere, ILike, In, IsNull, Repository } from 'typeorm';
 import { RentRecord } from '../entities/rentRecord.entity';
-import { CommonSearchResult } from 'src/common/types/common.type';
+import { CommonSearchResult } from '@common/types/common.type';
 import { CreateParams, SearchParams, UpdateParams } from '../types/rentRecord.type';
-import { PageInfoHelper } from 'src/common/helpers/pageInfo.helper';
-import { CommonService } from 'src/common/providers/common.service';
-import { ScooterService } from 'src/modules/scooters/providers/scooter.service';
-import { ScooterStatus } from 'src/modules/scooters/types/scooter.enum';
-import { Scooter } from 'src/modules/scooters/entities/scooter.entity';
+import { PageInfoHelper } from '@common/helpers/pageInfo.helper';
+import { CommonService } from '@common/providers/common.service';
+import { ScooterService } from '@modules/scooters/providers/scooter.service';
+import { ScooterStatus } from '@modules/scooters/types/scooter.enum';
+import { Scooter } from '@modules/scooters/entities/scooter.entity';
 import * as moment from 'moment';
 
 @Injectable()

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
-import { RentRecord } from 'src/modules/rentRecords/entities/rentRecord.entity';
+import { RentRecord } from '@modules/rentRecords/entities/rentRecord.entity';
 
 @Entity('users', { schema: 'public' })
 export class User {

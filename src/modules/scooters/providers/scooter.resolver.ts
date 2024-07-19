@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
 import { Scooter, ScooterCreateInput, ScooterSearchArgs, ScooterSearchResult, ScooterUpdateInput } from '../types/scooter.gql.type';
 import { ScooterService } from './scooter.service';
-import { RentRecordService } from 'src/modules/rentRecords/providers/rentRecord.service';
-import { RentRecord } from 'src/modules/rentRecords/types/rentRecord.gql.type';
+import { RentRecordService } from '@modules/rentRecords/providers/rentRecord.service';
+import { RentRecord } from '@modules/rentRecords/types/rentRecord.gql.type';
 
 @Resolver(() => Scooter)
 export class ScooterResolver {

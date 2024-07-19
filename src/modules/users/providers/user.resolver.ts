@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
 import { User, UserCreateInput, UserSearchArgs, UserSearchResult } from '../types/user.gql.type';
 import { UserService } from './user.service';
-import { RentRecord } from 'src/modules/rentRecords/types/rentRecord.gql.type';
-import { RentRecordService } from 'src/modules/rentRecords/providers/rentRecord.service';
+import { RentRecord } from '@modules/rentRecords/types/rentRecord.gql.type';
+import { RentRecordService } from '@modules/rentRecords/providers/rentRecord.service';
 
 @Resolver(() => User)
 export class UserResolver {

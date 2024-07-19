@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, Unique } from 'typeorm';
-import { Scooter } from 'src/modules/scooters/entities/scooter.entity';
-import { User } from 'src/modules/users/entities/user.entity';
+import { Scooter } from '@modules/scooters/entities/scooter.entity';
+import { User } from '@modules/users/entities/user.entity';
 
 @Entity('rent_records', { schema: 'public' })
 @Unique(['user', 'scooter', 'endTime'])

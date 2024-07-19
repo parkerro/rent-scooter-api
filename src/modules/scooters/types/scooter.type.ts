@@ -1,4 +1,4 @@
-import { CommonSearchParams } from "src/common/types/common.type";
+import { CommonSearchParams } from "@common/types/common.type";
 import { ScooterStatus } from "./scooter.enum";
 
 export type Scooter = {

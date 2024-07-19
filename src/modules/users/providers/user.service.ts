@@ -6,10 +6,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, ILike, In, Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import * as bcrypt from 'bcrypt';
-import { CommonSearchResult } from 'src/common/types/common.type';
+import { CommonSearchResult } from '@common/types/common.type';
 import { CreateParams, SearchParams } from '../types/user.type';
-import { PageInfoHelper } from 'src/common/helpers/pageInfo.helper';
-import { CommonService } from 'src/common/providers/common.service';
+import { PageInfoHelper } from '@common/helpers/pageInfo.helper';
+import { CommonService } from '@common/providers/common.service';
 
 @Injectable()
 export class UserService extends CommonService<User> {

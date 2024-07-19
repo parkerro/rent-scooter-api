@@ -1,4 +1,4 @@
-import { RentRecord } from 'src/modules/rentRecords/entities/rentRecord.entity';
+import { RentRecord } from '@modules/rentRecords/entities/rentRecord.entity';
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, Check } from 'typeorm';
 import { ScooterStatus } from '../types/scooter.enum';
 
