@@ -100,8 +100,12 @@ input ScooterSearchInput {
 
 type Mutation {
   createUser(input: UserCreateInput!): User!
-  createRentRecord(input: RentRecordCreateInput!): RentRecord!
-  updateRentRecord(input: RentRecordUpdateInput!): RentRecord!
+
+  """開始租借"""
+  startRental(input: StartRentalInput!): RentRecord!
+
+  """結束租借"""
+  endRental(input: EndRentalInput!): RentRecord!
   createScooter(input: ScooterCreateInput!): Scooter!
   updateScooter(input: ScooterUpdateInput!): Scooter!
 }
@@ -112,14 +116,16 @@ input UserCreateInput {
   password: String!
 }
 
-input RentRecordCreateInput {
+"""開始租借Input"""
+input StartRentalInput {
   userId: ID!
   scooterId: ID!
   startLatitude: Float!
   startLongitude: Float!
 }
 
-input RentRecordUpdateInput {
+"""結束租借Input"""
+input EndRentalInput {
   id: ID!
   endLatitude: Float!
   endLongitude: Float!

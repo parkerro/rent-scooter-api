@@ -60,7 +60,7 @@ export class RentRecordService extends CommonService<RentRecord> {
         };
     }
 
-    async create(params: CreateParams): Promise<RentRecord> {
+    async startRental(params: CreateParams): Promise<RentRecord> {
         // 檢查用戶是否有活躍的租借
         const activeRental = await this.rentRecordsRepo.findOne({
             where: { userId: params.userId, endTime: IsNull() }
@@ -92,7 +92,7 @@ export class RentRecordService extends CommonService<RentRecord> {
         return await this.findOneOrError(savedRentRecord.id)
     }
 
-    async update(params: UpdateParams): Promise<RentRecord> {
+    async endRental(params: UpdateParams): Promise<RentRecord> {
         const rentRecord = await this.findOneOrError(params.id);
 
         // 如果已結束租借，不更新任何資料

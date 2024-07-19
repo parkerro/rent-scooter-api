@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver, ResolveField, Root } from '@nestjs/graphql';
-import { RentRecord, RentRecordCreateInput, RentRecordSearchArgs, RentRecordSearchResult, RentRecordUpdateInput } from '../types/rentRecord.gql.type';
+import { EndRentalInput, RentRecord, RentRecordSearchArgs, RentRecordSearchResult, StartRentalInput } from '../types/rentRecord.gql.type';
 import { RentRecordService } from './rentRecord.service';
 import { User } from 'src/modules/users/types/user.gql.type';
 import { UserService } from 'src/modules/users/providers/user.service';
@@ -25,21 +25,21 @@ export class RentRecordResolver {
         return <RentRecordSearchResult>result;
     }
 
-    @Mutation((returns) => RentRecord)
-    async createRentRecord(
-        @Args('input') input: RentRecordCreateInput,
+    @Mutation((returns) => RentRecord, { description: '開始租借' })
+    async startRental(
+        @Args('input') input: StartRentalInput,
     ): Promise<RentRecord> {
-        const result = await this.rentRecordService.create({
+        const result = await this.rentRecordService.startRental({
             ...input,
         });
         return result;
     }
 
-    @Mutation((returns) => RentRecord)
-    async updateRentRecord(
-        @Args('input') input: RentRecordUpdateInput,
+    @Mutation((returns) => RentRecord, { description: '結束租借' })
+    async endRental(
+        @Args('input') input: EndRentalInput,
     ): Promise<RentRecord> {
-        const result = await this.rentRecordService.update({
+        const result = await this.rentRecordService.endRental({
             ...input,
         });
         return result;

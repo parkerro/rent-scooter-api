@@ -57,8 +57,8 @@ export class RentRecordSearchArgs extends CommonSearchArgs(RentRecordSearchInput
 @ObjectType()
 export class RentRecordSearchResult extends PaginatedSearchResult(RentRecord) { }
 
-@InputType()
-export class RentRecordCreateInput {
+@InputType({ description: '開始租借Input' })
+export class StartRentalInput {
     @Field((type) => ID)
     @IsNotEmpty()
     userId: number;
@@ -78,8 +78,8 @@ export class RentRecordCreateInput {
     startLongitude: number;
 }
 
-@InputType()
-export class RentRecordUpdateInput {
+@InputType({ description: '結束租借Input' })
+export class EndRentalInput {
     @Field((type) => ID)
     @IsNotEmpty()
     id: number;
