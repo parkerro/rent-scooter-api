@@ -1,7 +1,4 @@
-import {
-    Injectable,
-    ConflictException,
-} from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, ILike, In, Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
@@ -17,20 +14,11 @@ export class UserService extends CommonService<User> {
         @InjectRepository(User)
         private usersRepo: Repository<User>,
     ) {
-        super()
+        super();
     }
 
     async search(params: SearchParams): Promise<CommonSearchResult<User>> {
-        const filters: FindOptionsWhere<User> = {};
-        if (params.id) {
-            filters.id = params.id;
-        }
-        if (params.ids) {
-            filters.id = In(params.ids);
-        }
-        if (params.email) {
-            filters.email = ILike(`%${params.email}%`);
-        }
+        const filters: FindOptionsWhere<User> = this.buildSearchFilters(params);
 
         const [rows, count] = await this.usersRepo.findAndCount({
             where: filters,
@@ -50,6 +38,20 @@ export class UserService extends CommonService<User> {
             rows: rows,
             count: count,
         };
+    }
+
+    private buildSearchFilters(params: SearchParams): FindOptionsWhere<User> {
+        const filters: FindOptionsWhere<User> = {};
+        if (params.id) {
+            filters.id = params.id;
+        }
+        if (params.ids) {
+            filters.id = In(params.ids);
+        }
+        if (params.email) {
+            filters.email = ILike(`%${params.email}%`);
+        }
+        return filters;
     }
 
     async create(params: CreateParams): Promise<User> {

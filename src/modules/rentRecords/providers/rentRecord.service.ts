@@ -1,7 +1,4 @@
-import {
-    Injectable,
-    ConflictException,
-} from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, FindOptionsWhere, ILike, In, IsNull, Repository } from 'typeorm';
 import { RentRecord } from '../entities/rentRecord.entity';
@@ -22,23 +19,11 @@ export class RentRecordService extends CommonService<RentRecord> {
         private readonly scooterService: ScooterService,
         private dataSource: DataSource,
     ) {
-        super()
+        super();
     }
 
     async search(params: SearchParams): Promise<CommonSearchResult<RentRecord>> {
-        const filters: FindOptionsWhere<RentRecord> = {};
-        if (params.id) {
-            filters.id = params.id;
-        }
-        if (params.ids) {
-            filters.id = In(params.ids);
-        }
-        if (params.userId) {
-            filters.userId = params.userId;
-        }
-        if (params.scooterId) {
-            filters.scooterId = params.scooterId;
-        }
+        const filters: FindOptionsWhere<RentRecord> = this.buildSearchFilters(params);
 
         const [rows, count] = await this.rentRecordsRepo.findAndCount({
             where: filters,
@@ -58,6 +43,23 @@ export class RentRecordService extends CommonService<RentRecord> {
             rows: rows,
             count: count,
         };
+    }
+
+    private buildSearchFilters(params: SearchParams): FindOptionsWhere<RentRecord> {
+        const filters: FindOptionsWhere<RentRecord> = {};
+        if (params.id) {
+            filters.id = params.id;
+        }
+        if (params.ids) {
+            filters.id = In(params.ids);
+        }
+        if (params.userId) {
+            filters.userId = params.userId;
+        }
+        if (params.scooterId) {
+            filters.scooterId = params.scooterId;
+        }
+        return filters;
     }
 
     async startRental(params: CreateParams): Promise<RentRecord> {

@@ -1,7 +1,4 @@
-import {
-    Injectable,
-    ConflictException,
-} from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, ILike, In, Repository } from 'typeorm';
 import { Scooter } from '../entities/scooter.entity';
@@ -16,23 +13,11 @@ export class ScooterService extends CommonService<Scooter> {
         @InjectRepository(Scooter)
         private scootersRepo: Repository<Scooter>,
     ) {
-        super()
+        super();
     }
 
     async search(params: SearchParams): Promise<CommonSearchResult<Scooter>> {
-        const filters: FindOptionsWhere<Scooter> = {};
-        if (params.id) {
-            filters.id = params.id;
-        }
-        if (params.ids) {
-            filters.id = In(params.ids);
-        }
-        if (params.serialNumber) {
-            filters.serialNumber = params.serialNumber;
-        }
-        if (params.statuses) {
-            filters.status = In(params.statuses);
-        }
+        const filters: FindOptionsWhere<Scooter> = this.buildSearchFilters(params);
 
         const [rows, count] = await this.scootersRepo.findAndCount({
             where: filters,
@@ -55,6 +40,23 @@ export class ScooterService extends CommonService<Scooter> {
             rows: rows,
             count: count,
         };
+    }
+
+    private buildSearchFilters(params: SearchParams): FindOptionsWhere<Scooter> {
+        const filters: FindOptionsWhere<Scooter> = {};
+        if (params.id) {
+            filters.id = params.id;
+        }
+        if (params.ids) {
+            filters.id = In(params.ids);
+        }
+        if (params.serialNumber) {
+            filters.serialNumber = params.serialNumber;
+        }
+        if (params.statuses) {
+            filters.status = In(params.statuses);
+        }
+        return filters;
     }
 
     async create(params: CreateParams): Promise<Scooter> {
